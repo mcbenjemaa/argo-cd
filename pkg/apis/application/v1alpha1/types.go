@@ -245,6 +245,8 @@ type ApplicationSourceHelm struct {
 	IgnoreMissingValueFiles bool `json:"ignoreMissingValueFiles,omitempty" protobuf:"bytes,8,opt,name=ignoreMissingValueFiles"`
 	// SkipCrds skips custom resource definition installation step (Helm's --skip-crds)
 	SkipCrds bool `json:"skipCrds,omitempty" protobuf:"bytes,9,opt,name=skipCrds"`
+	// valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml
+	ValuesRaw *ValuesObject `json:"valuesRaw,omitempty" protobuf:"bytes,10,opt,name=valuesRaw"`
 }
 
 // HelmParameter is a parameter that's passed to helm template during manifest generation
