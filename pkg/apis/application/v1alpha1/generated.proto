@@ -213,6 +213,10 @@ message ApplicationSourceHelm {
 
   // SkipCrds skips custom resource definition installation step (Helm's --skip-crds)
   optional bool skipCrds = 9;
+
+  // valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml
+  // +kubebuilder:pruning:PreserveUnknownFields
+  optional ValuesObject valuesRaw = 10;
 }
 
 // ApplicationSourceJsonnet holds options specific to applications of type Jsonnet
@@ -689,6 +693,10 @@ message KustomizeOptions {
 
   // BinaryPath holds optional path to kustomize binary
   optional string binaryPath = 2;
+}
+
+// +kubebuilder:validation:Type=object
+message Object {
 }
 
 // Operation contains information about a requested or running operation
@@ -1359,5 +1367,10 @@ message TLSClientConfig {
   // CAData holds PEM-encoded bytes (typically read from a root certificates bundle).
   // CAData takes precedence over CAFile
   optional bytes caData = 5;
+}
+
+// ValuesObject is an Object
+message ValuesObject {
+  optional Object object = 1;
 }
 

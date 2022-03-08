@@ -668,6 +668,27 @@ func helmTemplate(appPath string, repoRoot string, env *v1alpha1.Env, q *apiclie
 			}
 			templateOpts.Values = append(templateOpts.Values, pathutil.ResolvedFilePath(p))
 		}
+        // ValuesRaw
+		if !appHelm.ValuesRaw.IsEmpty() {
+			file, err := ioutil.TempFile("", "values-*.yaml")
+			if err != nil {
+				return nil, err
+			}
+			p := file.Name()
+			defer func() { _ = os.RemoveAll(p) }()
+
+			b, err := appHelm.ValuesRaw.Object.Value.MarshalJSON()
+			if err != nil {
+				return nil, err
+			}
+            fmt.Println("ValuesRaw:", string(b))
+			err = ioutil.WriteFile(p, b, 0644)
+			if err != nil {
+				return nil, err
+			}
+			defer file.Close()
+			templateOpts.Values = append(templateOpts.Values, p)
+		}
 
 		for _, p := range appHelm.Parameters {
 			if p.ForceString {

@@ -281,6 +281,11 @@ spec:
                             description: Values specifies Helm values to be passed
                               to helm template, typically defined as a block
                             type: string
+                          valuesRaw:
+                            description: valuesRaw specifies Helm values to be passed
+                              to helm template, typically defined as raw yaml
+                            type: object
+                            x-kubernetes-preserve-unknown-fields: true
                           version:
                             description: Version is the Helm version to use for templating
                               (either "2" or "3")
@@ -628,6 +633,11 @@ spec:
                         description: Values specifies Helm values to be passed to
                           helm template, typically defined as a block
                         type: string
+                      valuesRaw:
+                        description: valuesRaw specifies Helm values to be passed
+                          to helm template, typically defined as raw yaml
+                        type: object
+                        x-kubernetes-preserve-unknown-fields: true
                       version:
                         description: Version is the Helm version to use for templating
                           (either "2" or "3")
@@ -982,6 +992,11 @@ spec:
                               description: Values specifies Helm values to be passed
                                 to helm template, typically defined as a block
                               type: string
+                            valuesRaw:
+                              description: valuesRaw specifies Helm values to be passed
+                                to helm template, typically defined as raw yaml
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
                             version:
                               description: Version is the Helm version to use for
                                 templating (either "2" or "3")
@@ -1353,6 +1368,12 @@ spec:
                                       passed to helm template, typically defined as
                                       a block
                                     type: string
+                                  valuesRaw:
+                                    description: valuesRaw specifies Helm values to
+                                      be passed to helm template, typically defined
+                                      as raw yaml
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
                                   version:
                                     description: Version is the Helm version to use
                                       for templating (either "2" or "3")
@@ -1698,6 +1719,12 @@ spec:
                                 description: Values specifies Helm values to be passed
                                   to helm template, typically defined as a block
                                 type: string
+                              valuesRaw:
+                                description: valuesRaw specifies Helm values to be
+                                  passed to helm template, typically defined as raw
+                                  yaml
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
                               version:
                                 description: Version is the Helm version to use for
                                   templating (either "2" or "3")
@@ -2032,6 +2059,12 @@ spec:
                                 description: Values specifies Helm values to be passed
                                   to helm template, typically defined as a block
                                 type: string
+                              valuesRaw:
+                                description: valuesRaw specifies Helm values to be
+                                  passed to helm template, typically defined as raw
+                                  yaml
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
                               version:
                                 description: Version is the Helm version to use for
                                   templating (either "2" or "3")

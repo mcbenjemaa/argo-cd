@@ -62,6 +62,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.JsonnetVar":                       schema_pkg_apis_application_v1alpha1_JsonnetVar(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.KnownTypeField":                   schema_pkg_apis_application_v1alpha1_KnownTypeField(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.KustomizeOptions":                 schema_pkg_apis_application_v1alpha1_KustomizeOptions(ref),
+		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.Object":                           schema_pkg_apis_application_v1alpha1_Object(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.Operation":                        schema_pkg_apis_application_v1alpha1_Operation(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.OperationInitiator":               schema_pkg_apis_application_v1alpha1_OperationInitiator(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.OperationState":                   schema_pkg_apis_application_v1alpha1_OperationState(ref),
@@ -102,6 +103,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.SyncStrategyHook":                 schema_pkg_apis_application_v1alpha1_SyncStrategyHook(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.SyncWindow":                       schema_pkg_apis_application_v1alpha1_SyncWindow(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.TLSClientConfig":                  schema_pkg_apis_application_v1alpha1_TLSClientConfig(ref),
+		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.ValuesObject":                     schema_pkg_apis_application_v1alpha1_ValuesObject(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.objectMeta":                       schema_pkg_apis_application_v1alpha1_objectMeta(ref),
 		"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.rawResourceOverride":              schema_pkg_apis_application_v1alpha1_rawResourceOverride(ref),
 	}
@@ -793,11 +795,18 @@ func schema_pkg_apis_application_v1alpha1_ApplicationSourceHelm(ref common.Refer
 							Format:      "",
 						},
 					},
+					"valuesRaw": {
+						SchemaProps: spec.SchemaProps{
+							Description: "valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.ValuesObject"),
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.HelmFileParameter", "github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.HelmParameter"},
+			"github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.HelmFileParameter", "github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.HelmParameter", "github.com/argoproj/argo-cd/v2/pkg/apis/application/v1alpha1.ValuesObject"},
 	}
 }
 
@@ -2413,6 +2422,17 @@ func schema_pkg_apis_application_v1alpha1_KustomizeOptions(ref common.ReferenceC
 					},
 				},
 				Required: []string{"BuildOptions", "BinaryPath"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_Object(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type:   Object{}.OpenAPISchemaType(),
+				Format: Object{}.OpenAPISchemaFormat(),
 			},
 		},
 	}
@@ -4595,6 +4615,17 @@ func schema_pkg_apis_application_v1alpha1_TLSClientConfig(ref common.ReferenceCa
 					},
 				},
 				Required: []string{"insecure"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_application_v1alpha1_ValuesObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ValuesObject is an Object",
+				Type:        []string{"object"},
 			},
 		},
 	}

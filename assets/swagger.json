@@ -4949,6 +4949,9 @@
           "type": "string",
           "title": "Values specifies Helm values to be passed to helm template, typically defined as a block"
         },
+        "valuesRaw": {
+          "$ref": "#/definitions/v1alpha1ValuesObject"
+        },
         "version": {
           "type": "string",
           "title": "Version is the Helm version to use for templating (either \"2\" or \"3\")"
@@ -5682,6 +5685,10 @@
           "title": "BuildOptions is a string of build parameters to use when calling `kustomize build`"
         }
       }
+    },
+    "v1alpha1Object": {
+      "type": "object",
+      "title": "+kubebuilder:validation:Type=object"
     },
     "v1alpha1Operation": {
       "type": "object",
@@ -6700,6 +6707,15 @@
         "serverName": {
           "description": "ServerName is passed to the server for SNI and is used in the client to check server\ncertificates against. If ServerName is empty, the hostname used to contact the\nserver is used.",
           "type": "string"
+        }
+      }
+    },
+    "v1alpha1ValuesObject": {
+      "type": "object",
+      "title": "ValuesObject is an Object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v1alpha1Object"
         }
       }
     },

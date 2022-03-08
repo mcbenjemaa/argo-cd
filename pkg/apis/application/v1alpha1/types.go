@@ -246,7 +246,8 @@ type ApplicationSourceHelm struct {
 	// SkipCrds skips custom resource definition installation step (Helm's --skip-crds)
 	SkipCrds bool `json:"skipCrds,omitempty" protobuf:"bytes,9,opt,name=skipCrds"`
 	// valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml
-	ValuesRaw *ValuesObject `json:"valuesRaw,omitempty" protobuf:"bytes,10,opt,name=valuesRaw"`
+	// +kubebuilder:pruning:PreserveUnknownFields
+	ValuesRaw ValuesObject `json:"valuesRaw,omitempty" protobuf:"bytes,10,opt,name=valuesRaw"`
 }
 
 // HelmParameter is a parameter that's passed to helm template during manifest generation
@@ -328,7 +329,7 @@ func (in *ApplicationSourceHelm) AddFileParameter(p HelmFileParameter) {
 
 // IsZero Returns true if the Helm options in an application source are considered zero
 func (h *ApplicationSourceHelm) IsZero() bool {
-	return h == nil || (h.Version == "") && (h.ReleaseName == "") && len(h.ValueFiles) == 0 && len(h.Parameters) == 0 && len(h.FileParameters) == 0 && h.Values == "" && !h.PassCredentials && !h.IgnoreMissingValueFiles && !h.SkipCrds
+	return h == nil || (h.Version == "") && (h.ReleaseName == "") && len(h.ValueFiles) == 0 && len(h.Parameters) == 0 && len(h.FileParameters) == 0 && h.Values == "" && h.ValuesRaw.IsEmpty() && !h.PassCredentials && !h.IgnoreMissingValueFiles && !h.SkipCrds
 }
 
 // KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>

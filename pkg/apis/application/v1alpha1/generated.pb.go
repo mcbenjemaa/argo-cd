@@ -1380,6 +1380,34 @@ func (m *KustomizeOptions) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_KustomizeOptions proto.InternalMessageInfo
 
+func (m *Object) Reset()      { *m = Object{} }
+func (*Object) ProtoMessage() {}
+func (*Object) Descriptor() ([]byte, []int) {
+	return fileDescriptor_030104ce3b95bcac, []int{50}
+}
+func (m *Object) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Object) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalToSizedBuffer(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (m *Object) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Object.Merge(m, src)
+}
+func (m *Object) XXX_Size() int {
+	return m.Size()
+}
+func (m *Object) XXX_DiscardUnknown() {
+	xxx_messageInfo_Object.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Object proto.InternalMessageInfo
+
 func (m *Operation) Reset()      { *m = Operation{} }
 func (*Operation) ProtoMessage() {}
 func (*Operation) Descriptor() ([]byte, []int) {
@@ -2500,6 +2528,34 @@ func (m *TLSClientConfig) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TLSClientConfig proto.InternalMessageInfo
 
+func (m *ValuesObject) Reset()      { *m = ValuesObject{} }
+func (*ValuesObject) ProtoMessage() {}
+func (*ValuesObject) Descriptor() ([]byte, []int) {
+	return fileDescriptor_030104ce3b95bcac, []int{91}
+}
+func (m *ValuesObject) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ValuesObject) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	b = b[:cap(b)]
+	n, err := m.MarshalToSizedBuffer(b)
+	if err != nil {
+		return nil, err
+	}
+	return b[:n], nil
+}
+func (m *ValuesObject) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ValuesObject.Merge(m, src)
+}
+func (m *ValuesObject) XXX_Size() int {
+	return m.Size()
+}
+func (m *ValuesObject) XXX_DiscardUnknown() {
+	xxx_messageInfo_ValuesObject.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ValuesObject proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*AWSAuthConfig)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.AWSAuthConfig")
 	proto.RegisterType((*AppProject)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.AppProject")
@@ -2555,6 +2611,7 @@ func init() {
 	proto.RegisterType((*JsonnetVar)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.JsonnetVar")
 	proto.RegisterType((*KnownTypeField)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.KnownTypeField")
 	proto.RegisterType((*KustomizeOptions)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.KustomizeOptions")
+	proto.RegisterType((*Object)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.Object")
 	proto.RegisterType((*Operation)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.Operation")
 	proto.RegisterType((*OperationInitiator)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.OperationInitiator")
 	proto.RegisterType((*OperationState)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.OperationState")
@@ -2597,6 +2654,7 @@ func init() {
 	proto.RegisterType((*SyncStrategyHook)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.SyncStrategyHook")
 	proto.RegisterType((*SyncWindow)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.SyncWindow")
 	proto.RegisterType((*TLSClientConfig)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.TLSClientConfig")
+	proto.RegisterType((*ValuesObject)(nil), "github.com.argoproj.argo_cd.v2.pkg.apis.application.v1alpha1.ValuesObject")
 }
 
 func init() {
@@ -3736,6 +3794,16 @@ func (m *ApplicationSourceHelm) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	{
+		size, err := m.ValuesRaw.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintGenerated(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x52
 	i--
 	if m.SkipCrds {
 		dAtA[i] = 1
@@ -5712,6 +5780,29 @@ func (m *KustomizeOptions) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i = encodeVarintGenerated(dAtA, i, uint64(len(m.BuildOptions)))
 	i--
 	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *Object) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Object) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Object) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
 	return len(dAtA) - i, nil
 }
 
@@ -8113,6 +8204,39 @@ func (m *TLSClientConfig) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *ValuesObject) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ValuesObject) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ValuesObject) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.Object.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintGenerated(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintGenerated(dAtA []byte, offset int, v uint64) int {
 	offset -= sovGenerated(v)
 	base := offset
@@ -8406,6 +8530,8 @@ func (m *ApplicationSourceHelm) Size() (n int) {
 	n += 2
 	n += 2
 	n += 2
+	l = m.ValuesRaw.Size()
+	n += 1 + l + sovGenerated(uint64(l))
 	return n
 }
 
@@ -9125,6 +9251,15 @@ func (m *KustomizeOptions) Size() (n int) {
 	n += 1 + l + sovGenerated(uint64(l))
 	l = len(m.BinaryPath)
 	n += 1 + l + sovGenerated(uint64(l))
+	return n
+}
+
+func (m *Object) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
 	return n
 }
 
@@ -10031,6 +10166,17 @@ func (m *TLSClientConfig) Size() (n int) {
 	return n
 }
 
+func (m *ValuesObject) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.Object.Size()
+	n += 1 + l + sovGenerated(uint64(l))
+	return n
+}
+
 func sovGenerated(x uint64) (n int) {
 	return (math_bits.Len64(x|1) + 6) / 7
 }
@@ -10263,6 +10409,7 @@ func (this *ApplicationSourceHelm) String() string {
 		`PassCredentials:` + fmt.Sprintf("%v", this.PassCredentials) + `,`,
 		`IgnoreMissingValueFiles:` + fmt.Sprintf("%v", this.IgnoreMissingValueFiles) + `,`,
 		`SkipCrds:` + fmt.Sprintf("%v", this.SkipCrds) + `,`,
+		`ValuesRaw:` + strings.Replace(strings.Replace(this.ValuesRaw.String(), "ValuesObject", "ValuesObject", 1), `&`, ``, 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -10840,6 +10987,15 @@ func (this *KustomizeOptions) String() string {
 	s := strings.Join([]string{`&KustomizeOptions{`,
 		`BuildOptions:` + fmt.Sprintf("%v", this.BuildOptions) + `,`,
 		`BinaryPath:` + fmt.Sprintf("%v", this.BinaryPath) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *Object) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&Object{`,
 		`}`,
 	}, "")
 	return s
@@ -11491,6 +11647,16 @@ func (this *TLSClientConfig) String() string {
 		`CertData:` + valueToStringGenerated(this.CertData) + `,`,
 		`KeyData:` + valueToStringGenerated(this.KeyData) + `,`,
 		`CAData:` + valueToStringGenerated(this.CAData) + `,`,
+		`}`,
+	}, "")
+	return s
+}
+func (this *ValuesObject) String() string {
+	if this == nil {
+		return "nil"
+	}
+	s := strings.Join([]string{`&ValuesObject{`,
+		`Object:` + strings.Replace(strings.Replace(this.Object.String(), "Object", "Object", 1), `&`, ``, 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -13856,6 +14022,39 @@ func (m *ApplicationSourceHelm) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.SkipCrds = bool(v != 0)
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ValuesRaw", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenerated
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.ValuesRaw.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])
@@ -20103,6 +20302,56 @@ func (m *KustomizeOptions) Unmarshal(dAtA []byte) error {
 			}
 			m.BinaryPath = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGenerated(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Object) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGenerated
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Object: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Object: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenerated(dAtA[iNdEx:])
@@ -28323,6 +28572,89 @@ func (m *TLSClientConfig) Unmarshal(dAtA []byte) error {
 			m.CAData = append(m.CAData[:0], dAtA[iNdEx:postIndex]...)
 			if m.CAData == nil {
 				m.CAData = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGenerated(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ValuesObject) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGenerated
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ValuesObject: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ValuesObject: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Object", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenerated
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenerated
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Object.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
 			}
 			iNdEx = postIndex
 		default:
