@@ -216,6 +216,7 @@ message ApplicationSourceHelm {
 
   // valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml
   // +kubebuilder:pruning:PreserveUnknownFields
+  // +patchStrategy=replace
   optional ValuesObject valuesRaw = 10;
 }
 
@@ -697,6 +698,7 @@ message KustomizeOptions {
 
 // +kubebuilder:validation:Type=object
 message Object {
+  optional bytes value = 1;
 }
 
 // Operation contains information about a requested or running operation
@@ -1370,6 +1372,8 @@ message TLSClientConfig {
 }
 
 // ValuesObject is an Object
+// +patchStrategy=replace
+// +protobuf.options.(gogoproto.goproto_stringer)=false
 message ValuesObject {
   optional Object object = 1;
 }

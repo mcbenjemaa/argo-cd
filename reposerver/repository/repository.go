@@ -24,7 +24,7 @@ import (
 	textutils "github.com/argoproj/gitops-engine/pkg/utils/text"
 	"github.com/argoproj/pkg/sync"
 	jsonpatch "github.com/evanphx/json-patch"
-	"github.com/ghodss/yaml"
+	yaml "sigs.k8s.io/yaml"
 	gogit "github.com/go-git/go-git/v5"
 	"github.com/google/go-jsonnet"
 	"github.com/google/uuid"
@@ -442,7 +442,6 @@ func (s *Service) getManifestCacheEntry(cacheKey string, q *apiclient.ManifestRe
 	res := cache.CachedManifestResponse{}
 	err := s.cache.GetManifests(cacheKey, q.ApplicationSource, q, q.Namespace, q.TrackingMethod, q.AppLabelKey, q.AppName, &res)
 	if err == nil {
-
 		// The cache contains an existing value
 
 		// If caching of manifest generation errors is enabled, and res is a cached manifest generation error...
@@ -669,25 +668,26 @@ func helmTemplate(appPath string, repoRoot string, env *v1alpha1.Env, q *apiclie
 			templateOpts.Values = append(templateOpts.Values, pathutil.ResolvedFilePath(p))
 		}
         // ValuesRaw
+		fmt.Println("IsEmpty:", appHelm.ValuesRaw.IsEmpty())
 		if !appHelm.ValuesRaw.IsEmpty() {
-			file, err := ioutil.TempFile("", "values-*.yaml")
+			rand, err := uuid.NewRandom()
 			if err != nil {
 				return nil, err
 			}
-			p := file.Name()
-			defer func() { _ = os.RemoveAll(p) }()
 
-			b, err := appHelm.ValuesRaw.Object.Value.MarshalJSON()
+			p := path.Join(os.TempDir(), rand.String())
+			defer func() { _ = os.RemoveAll(p) }()
+			b, err := yaml.JSONToYAML(appHelm.ValuesRaw.Object.DeepCopy().Value)
 			if err != nil {
-				return nil, err
+			 	return nil, err
 			}
+			
             fmt.Println("ValuesRaw:", string(b))
 			err = ioutil.WriteFile(p, b, 0644)
 			if err != nil {
 				return nil, err
 			}
-			defer file.Close()
-			templateOpts.Values = append(templateOpts.Values, p)
+			templateOpts.Values = append(templateOpts.Values, pathutil.ResolvedFilePath(p))
 		}
 
 		for _, p := range appHelm.Parameters {

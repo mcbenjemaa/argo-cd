@@ -247,7 +247,8 @@ type ApplicationSourceHelm struct {
 	SkipCrds bool `json:"skipCrds,omitempty" protobuf:"bytes,9,opt,name=skipCrds"`
 	// valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml
 	// +kubebuilder:pruning:PreserveUnknownFields
-	ValuesRaw ValuesObject `json:"valuesRaw,omitempty" protobuf:"bytes,10,opt,name=valuesRaw"`
+	// +patchStrategy=replace
+	ValuesRaw ValuesObject `json:"valuesRaw,omitempty" patchStrategy:"replace" protobuf:"bytes,10,opt,name=valuesRaw"`
 }
 
 // HelmParameter is a parameter that's passed to helm template during manifest generation

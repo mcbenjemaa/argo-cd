@@ -5688,7 +5688,13 @@
     },
     "v1alpha1Object": {
       "type": "object",
-      "title": "+kubebuilder:validation:Type=object"
+      "title": "+kubebuilder:validation:Type=object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
     },
     "v1alpha1Operation": {
       "type": "object",
@@ -6712,7 +6718,7 @@
     },
     "v1alpha1ValuesObject": {
       "type": "object",
-      "title": "ValuesObject is an Object",
+      "title": "ValuesObject is an Object\n+patchStrategy=replace\n+protobuf.options.(gogoproto.goproto_stringer)=false",
       "properties": {
         "object": {
           "$ref": "#/definitions/v1alpha1Object"

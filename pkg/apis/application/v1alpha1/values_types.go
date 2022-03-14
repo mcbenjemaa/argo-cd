@@ -1,8 +1,14 @@
 package v1alpha1
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"sigs.k8s.io/yaml"
+)
 
 // ValuesObject is an Object
+// +patchStrategy=replace
+// +protobuf.options.(gogoproto.goproto_stringer)=false
 type ValuesObject struct {
 	Object `json:",inline" protobuf:"bytes,1,opt,name=object"`
 }
@@ -35,4 +41,20 @@ func (p *ValuesObject) UnmarshalMap() (map[string]interface{}, error) {
 
 func (p ValuesObject) IsEmpty() bool {
 	return len(p.Object.Value) == 0
+}
+
+// String formats the ValuesObject as a string, caching the result if not calculated.
+// String is an expensive operation and caching this result significantly reduces the cost of
+// normal parse / marshal operations on Quantity.
+func (q *ValuesObject) String() string {
+	b, err := yaml.JSONToYAML(q.Object.Value)
+	if err != nil {
+		return "<nil>"
+	}
+	return string(b)
+}
+
+// ToUnstructured implements the value.UnstructuredConverter interface.
+func (q ValuesObject) ToUnstructured() interface{} {
+	return q.String()
 }

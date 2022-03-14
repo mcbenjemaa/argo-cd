@@ -796,6 +796,11 @@ func schema_pkg_apis_application_v1alpha1_ApplicationSourceHelm(ref common.Refer
 						},
 					},
 					"valuesRaw": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-patch-strategy": "replace",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Description: "valuesRaw specifies Helm values to be passed to helm template, typically defined as raw yaml",
 							Default:     map[string]interface{}{},
@@ -4626,6 +4631,11 @@ func schema_pkg_apis_application_v1alpha1_ValuesObject(ref common.ReferenceCallb
 			SchemaProps: spec.SchemaProps{
 				Description: "ValuesObject is an Object",
 				Type:        []string{"object"},
+			},
+			VendorExtensible: spec.VendorExtensible{
+				Extensions: spec.Extensions{
+					"x-kubernetes-patch-strategy": "replace",
+				},
 			},
 		},
 	}
